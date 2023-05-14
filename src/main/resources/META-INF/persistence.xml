@@ -9,7 +9,7 @@
             <property name="javax.persistence.jdbc.url"
                       value="jdbc:postgresql://localhost:5432/authenticationservice"/>
             <property name="javax.persistence.jdbc.user" value="postgres"/>
-            <property name="javax.persistence.jdbc.password" value="password"/>
+            <property name="javax.persistence.jdbc.password" value="85936797"/>
             <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
 
             <property name="hibernate.enable_lazy_load_no_trans" value="true"/>
