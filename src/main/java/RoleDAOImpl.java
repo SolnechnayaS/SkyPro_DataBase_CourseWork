@@ -23,12 +23,12 @@ public class RoleDAOImpl implements RoleDAO {
         return roles;
     }
     @Override
-    public void getRolesWithUsersList() throws SQLException {
+    public void printRolesWithUsersList() throws SQLException {
         getAllRole().forEach(Role::toStringWithUsersList);
     }
 
     @Override
-    public void getRolesWithUsersList(Role role) throws SQLException {
+    public void printRolesWithUsersList(Role role) throws SQLException {
         role.toStringWithUsersList();
     }
 
@@ -58,9 +58,8 @@ public class RoleDAOImpl implements RoleDAO {
         entityManager.getTransaction().commit();
 
         while (findRole==null) {
-            System.out.println("Роль с заданным id не существует. Введите другой id: ");
-            Scanner scanner = new Scanner(System.in);
-            findRole = getRoleById(scanner.useDelimiter("\n").nextInt());
+            System.out.println("Роль с заданным role_id не существует. Введите другой role_id: ");
+            findRole = getRoleById(Input.inputIntegerPositive());
         }
 
         entityManager.getEntityManagerFactory().close();
@@ -71,20 +70,20 @@ public class RoleDAOImpl implements RoleDAO {
 
     @Override
     public void createRole(String newRoleName) {
-//        Scanner scanner = new Scanner(System.in);
-//
-//        System.out.println("Введите новую роль: ");
-//        String newRoleName = scanner.useDelimiter("\n").next();
 
         if (findRoleByName(newRoleName) == null) {
             EntityManager entityManager = EMF.emfCreate();
+
             entityManager.getTransaction().begin();
             entityManager.persist(new Role(newRoleName));
             entityManager.getTransaction().commit();
+
+            entityManager.getEntityManagerFactory().close();
+            entityManager.close();
         } else {
             System.out.println("Роль с названием " + newRoleName + " уже существует, ее role_id=" + findRoleByName(newRoleName).getRoleId());
         }
-        ;
+
     }
 
     @Override
@@ -93,9 +92,8 @@ public class RoleDAOImpl implements RoleDAO {
 
         if (!role.getRole().equals("По умолчанию")) {
 
-            Scanner scanner = new Scanner(System.in);
             System.out.println("Введите обновленное название роли: ");
-            String newRoleName = scanner.useDelimiter("\n").next();
+            String newRoleName = Input.inputString();
             try {
                 entityManager.getTransaction().begin();
                 String jpqlQuery1 = "SELECT s FROM Role s WHERE role=" + "'" + newRoleName + "'";
@@ -174,14 +172,12 @@ public class RoleDAOImpl implements RoleDAO {
             entityManager.getTransaction().commit();
         } catch (RuntimeException e) {
             entityManager.getTransaction().commit();
-//            role = new Role(roleName);
-//
-//            entityManager.getTransaction().begin();
-//            entityManager.persist(role);
-//            entityManager.getTransaction().commit();
 
             role = null;
         }
+
+        entityManager.getEntityManagerFactory().close();
+        entityManager.close();
 
         return role;
     }

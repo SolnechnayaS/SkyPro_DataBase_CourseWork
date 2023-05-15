@@ -14,7 +14,7 @@ public interface UserDAO {
     public Set<Role> addRoleList() throws SQLException;
     public Set<Role> addRoleList(User user) throws SQLException;
     public Set<Role> deleteRoleFromList(User user) throws SQLException;
-    public void getUsersWithRolesList() throws SQLException;
-    public void getUsersWithRolesList(User user) throws SQLException;
+    public void printUsersWithRolesList() throws SQLException;
+    public void printUsersWithRolesList(User user) throws SQLException;
     void deleteUser(User user);
 }

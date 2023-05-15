@@ -96,7 +96,7 @@ public class User {
     }
 
     public void toStringWithRolesList () {
-        System.out.println("User{" +
+        System.out.println("\nUser{" +
                 "Id=" + userId +
                 ", Имя='" + name + '\'' +
                 ", login='" + login + '\'' +
@@ -108,7 +108,7 @@ public class User {
     }
     @Override
     public String toString() {
-        return "User{" +
+        return "\nUser{" +
                 "Id=" + userId +
                 ", Имя='" + name + '\'' +
                 ", login='" + login + '\'' +

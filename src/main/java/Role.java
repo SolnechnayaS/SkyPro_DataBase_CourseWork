@@ -1,7 +1,8 @@
 import jakarta.persistence.*;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import java.util.*;
-import java.util.HashMap;
+
 
 @Entity
 @Table (name="roles")
@@ -77,4 +78,5 @@ public class Role {
         Role role1 = (Role) o;
         return getRoleId() == role1.getRoleId() && getRole().equals(role1.getRole());
     }
+
 }
